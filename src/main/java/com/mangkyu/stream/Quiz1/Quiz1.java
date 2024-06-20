@@ -15,7 +15,7 @@ public class Quiz1 {
     public static void main(String[] args) throws IOException {
         Quiz1 quiz1 = new Quiz1();
 
-        quiz1.quiz1();
+        quiz1.quiz3();
     }
 
     // 1.1 각 취미를 선호하는 인원이 몇 명인지 계산하여라.
@@ -43,7 +43,18 @@ public class Quiz1 {
     // 1.3 소개 내용에 '좋아'가 몇번 등장하는지 계산하여라.
     public int quiz3() throws IOException {
         List<String[]> csvLines = readCsvLines();
-        return 0;
+
+        return csvLines.stream()
+                .map(elem -> likeLetterCount(elem[2], 0))
+                .reduce(0, Integer::sum);
+    }
+
+    private int likeLetterCount(String str, int fromIndex) {
+        int index = str.indexOf("좋아", fromIndex);
+        if (index == -1) {
+            return 0;
+        }
+        return 1 + likeLetterCount(str, index + "좋아".length());
     }
 
     private List<String[]> readCsvLines() throws IOException {

@@ -31,7 +31,13 @@ public class Quiz1 {
     // 1.2 각 취미를 선호하는 정씨 성을 갖는 인원이 몇 명인지 계산하여라.
     public Map<String, Integer> quiz2() throws IOException {
         List<String[]> csvLines = readCsvLines();
-        return new HashMap<>();
+
+
+        return csvLines.stream()
+                        .filter(elem -> elem[0].startsWith("정"))
+                        .map(elem -> elem[1].replaceAll(" ", ""))
+                        .flatMap(elem -> Arrays.stream(elem.split(":")))
+                        .collect(Collectors.toMap(elem -> elem, elem -> 1, (oldValue, newValue) -> oldValue + 1));
     }
 
     // 1.3 소개 내용에 '좋아'가 몇번 등장하는지 계산하여라.

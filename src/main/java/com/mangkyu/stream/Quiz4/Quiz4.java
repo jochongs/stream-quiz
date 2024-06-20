@@ -79,7 +79,23 @@ public class Quiz4 {
 
     // 4.7 모든 거래 내역중에서 거래 금액의 최댓값과 최솟값을 구하라. 단, 최댓값은 reduce를 이용하고 최솟값은 stream의 min()을 이용하라.
     public Integer[] quiz7() {
-        return new Integer[]{0, 0};
+        Integer[] arr = new Integer[2];
+        arr[0] = transactions.stream()
+                .map(Transaction::getValue)
+                .reduce(Integer::max)
+                .orElse(0);
+
+        arr[1] = transactions.stream()
+                .map(Transaction::getValue)
+                .min(Comparator.comparing(num -> num))
+                .orElse(0);
+
+        arr[1] = transactions.stream()
+                .min(Comparator.comparing(Transaction::getValue))
+                .orElseThrow(RuntimeException::new)
+                .getValue();
+
+        return arr;
     }
 
 }

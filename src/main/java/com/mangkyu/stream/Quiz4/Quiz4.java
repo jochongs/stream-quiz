@@ -58,7 +58,8 @@ public class Quiz4 {
         return transactions.stream()
                 .map(Transaction::getTrader)
                 .distinct()
-                .map(trader -> trader.getName())
+                .map(Trader::getName)
+                .sorted()
                 .collect(Collectors.joining(","));
     }
 

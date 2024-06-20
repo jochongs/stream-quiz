@@ -65,7 +65,8 @@ public class Quiz4 {
 
     // 4.5 부산에 거래자가 있는지를 확인하라.
     public boolean quiz5() {
-        return false;
+        return transactions.stream()
+                .anyMatch(t -> t.getTrader().getCity().equals("Busan"));
     }
 
     // 4.6 서울에 거주하는 거래자의 모든 거래 금액을 구하라.

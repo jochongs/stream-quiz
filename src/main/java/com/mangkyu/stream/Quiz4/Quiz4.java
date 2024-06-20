@@ -71,7 +71,10 @@ public class Quiz4 {
 
     // 4.6 서울에 거주하는 거래자의 모든 거래 금액을 구하라.
     public List<Integer> quiz6() {
-        return Collections.emptyList();
+        return transactions.stream()
+                .filter(t -> t.getTrader().getCity().equals("Seoul"))
+                .map(Transaction::getValue)
+                .collect(Collectors.toList());
     }
 
     // 4.7 모든 거래 내역중에서 거래 금액의 최댓값과 최솟값을 구하라. 단, 최댓값은 reduce를 이용하고 최솟값은 stream의 min()을 이용하라.

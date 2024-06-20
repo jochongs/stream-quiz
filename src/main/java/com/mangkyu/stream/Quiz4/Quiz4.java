@@ -31,12 +31,7 @@ public class Quiz4 {
     public List<Transaction> quiz1() {
         return transactions.stream()
                 .filter(elem -> elem.getYear() == 2020)
-                .sorted(new Comparator<Transaction>() {
-                    @Override
-                    public int compare(Transaction o1, Transaction o2) {
-                        return o1.getValue() - o2.getValue();
-                    }
-                })
+                .sorted(Comparator.comparing(Transaction::getValue))
                 .collect(Collectors.toList());
     }
 
@@ -60,7 +55,11 @@ public class Quiz4 {
 
     // 4.4 모든 거래자의 이름을 구분자(",")로 구분하여 정렬하라.
     public String quiz4() {
-        return null;
+        return transactions.stream()
+                .map(Transaction::getTrader)
+                .distinct()
+                .map(trader -> trader.getName())
+                .collect(Collectors.joining(","));
     }
 
     // 4.5 부산에 거래자가 있는지를 확인하라.

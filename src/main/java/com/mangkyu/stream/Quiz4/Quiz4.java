@@ -42,7 +42,10 @@ public class Quiz4 {
 
     // 4.2 거래 내역이 있는 거래자가 근무하는 모든 도시를 중복 없이 나열하라.
     public List<String> quiz2() {
-        return Collections.emptyList();
+        return transactions.stream()
+                .map(elem -> elem.getTrader().getCity())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     // 4.3 서울에서 근무하는 모든 거래자를 찾아서 이름순서대로 정렬하라.
